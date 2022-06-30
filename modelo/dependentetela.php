@@ -62,5 +62,6 @@
     <img src = "./assets/card.png" alt = "Cartão identificador">
         <div class = "circle"></div>
     </section>
+    <a href="./home.php">Início</a>
 </body>
 </html>
