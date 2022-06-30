@@ -1,0 +1,1 @@
+private static $dsn = 'mysql:host=localhost;dbname=trabalho'

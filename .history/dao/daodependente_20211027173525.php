@@ -1,0 +1,53 @@
+<?php
+  class daodependente{
+    public function listaTodos()
+    {
+      $lista = [];
+      $pst = Conexao::getPreparedStatement('select * from dependente;');
+      $pst->execute();
+      $lista = $pst->fetchAll(PDO::FETCH_ASSOC);
+      return $lista;
+    }
+    public function inclui(Cadastro $cadastro)
+    {
+      $sql = 'insert into cadastro (id, nome, unome, cpf, rg) values (?, ?, ?, ?, ?);';
+      $pst = Conexao::getPreparedStatement($sql);
+      $i = $this->registros();
+      $pst -> bindValue(1, $i['id']+1);
+      $pst->bindValue(2, $cadastro->getNome());
+      $pst->bindValue(3, $cadastro->getUnome());
+      $pst->bindValue(4, $cadastro->getCpf());
+      $pst->bindValue(5, $cadastro->getRg());
+      if ($pst->execute()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    public function exclui(Cadastro $cadastro)
+    {
+      $sql = 'delete from cadastro where id = ?;';
+      $pst = Conexao::getPreparedStatement($sql);
+      $pst->bindValue(1, $cadastro->getId());
+      if ($pst->execute()) {;
+        return true;
+      }else{
+        return false;
+      }
+    }
+    public function atualiza(Cadastro $novo){
+      $sql = 'update cadastro set nome = ?, unome = ?, cpf = ?, rg = ? where id = ?;';
+      $pst = Conexao::getPreparedStatement($sql);
+      $pst->bindValue(1, $novo->getNome());
+      $pst->bindValue(2, $novo->getUnome());
+      $pst->bindValue(3, $novo->getCpf());
+      $pst->bindValue(4, $novo->getRg());
+      $pst->bindValue(5, $novo->getId());
+      if ($pst->execute()) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  }
+?>

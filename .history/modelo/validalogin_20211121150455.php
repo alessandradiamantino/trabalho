@@ -1,0 +1,16 @@
+<?php
+section
+$usuario = $_POST['usuario']; 
+$senha = $_POST['senha'];
+$daocadastro = new daocadastro();
+$cadastro = new cadastro();
+$resultado = $daocadastro->validalogin($usuario, $senha);
+if($resultado == false){
+  ?>
+  <script>alert("ERRO")</script>;
+  <?php
+}
+else{
+ 
+}
+?>
